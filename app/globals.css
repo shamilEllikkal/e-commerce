@@ -1,26 +1,118 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary-color: #212529;
+  --ink: #212529;
+  --heading-color: #212529;
+  --heading-weight: 800;
+  --secondary-color: #576471;
+  --secondary-size: 12px;
+  --secondary-padding-y: 0px;
+  --secondary-padding-x: 17.5px;
+  --body: #4d6680;
+  --muted: #8d99a6;
+  --line: #e7eaed;
+  --soft: #f7f8f9;
+  --white: #ffffff;
+  --lavender: #f0eafd;
+  --cream: #fff0c9;
+  --yellow: #ffecbc;
+  --pink: #fcedf1;
+  --green: #eaf8ef;
+  --cyan: #e8f7f8;
+  --purple: #f0ebff;
+  --accent: #c78d20;
+  --container: 1660px;
+  --page-gutter: 115.4px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary-color);
+  --color-ink: var(--ink);
+  --color-secondary: var(--secondary-color);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-soft: var(--soft);
+  --color-lavender: var(--lavender);
+  --color-cream: var(--cream);
+  --color-yellow: var(--yellow);
+  --color-pink: var(--pink);
+  --color-green: var(--green);
+  --color-cyan: var(--cyan);
+  --color-purple: var(--purple);
+  --font-sans: var(--font-alexandria);
+  --font-heading: var(--font-alexandria);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--accent);
+  color: #ffffff;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: #fff;
+  color: var(--primary-color);
+  font-family: var(--font-alexandria), sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.container {
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--container));
+  margin-inline: auto;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+}
+
+
+
+@media (max-width: 1200px) {
+  .container {
+    width: min(calc(100% - 40px), var(--container));
+  }
+}
+
+@media (max-width: 760px) {
+  .container {
+    width: min(calc(100% - 28px), var(--container));
+  }
 }
