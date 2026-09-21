@@ -17,6 +17,8 @@ interface ShopSidebarProps {
   priceMax: number;
   categories: string[];
   onToggleCategory: (label: string) => void;
+  colors: string[];
+  onToggleColor: (label: string) => void;
 }
 
 const colorFilters = [
@@ -52,6 +54,8 @@ export function ShopSidebar({
   priceMax,
   categories,
   onToggleCategory,
+  colors,
+  onToggleColor,
 }: ShopSidebarProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const dragging = useRef<"low" | "high" | null>(null);
@@ -136,10 +140,14 @@ export function ShopSidebar({
         <ul className="flex flex-col gap-2">
           {colorFilters.map(({ label, count, hex, border }) => (
             <li key={label}>
-              <label className="group flex cursor-pointer items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={() => onToggleColor(label)}
+                className="group flex w-full cursor-pointer items-center justify-between gap-3"
+              >
                 <span className="flex items-center gap-3">
                   <span
-                    className={`h-5 w-5 flex-shrink-0 rounded-full ${border ? "border border-line" : ""}`}
+                    className={`h-5 w-5 flex-shrink-0 rounded-full transition ${border ? "border border-line" : ""} ${colors.includes(label) ? "ring-2 ring-ink ring-offset-1" : ""}`}
                     style={{ backgroundColor: hex }}
                     aria-hidden="true"
                   />
@@ -148,7 +156,7 @@ export function ShopSidebar({
                   </span>
                 </span>
                 <span className="text-[12px] text-muted">{count}</span>
-              </label>
+              </button>
             </li>
           ))}
         </ul>

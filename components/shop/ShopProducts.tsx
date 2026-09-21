@@ -24,21 +24,26 @@ export function ShopProducts({
   priceLow,
   priceHigh,
   categories,
+  colors,
   page,
   onPageChange,
+  onReset,
 }: {
   priceLow: number;
   priceHigh: number;
   categories: string[];
+  colors: string[];
   page: number;
   onPageChange: (p: number) => void;
+  onReset: () => void;
 }) {
   const [sort, setSort] = useState("default");
 
   const filtered = allProducts.filter((p) => {
     const inPrice = p.price >= priceLow && p.price <= priceHigh;
     const inCat = categories.length === 0 || categories.includes(p.category);
-    return inPrice && inCat;
+    const inColor = colors.length === 0 || colors.includes(p.color);
+    return inPrice && inCat && inColor;
   });
 
   const sorted = [...filtered].sort((a, b) => {
@@ -57,11 +62,22 @@ export function ShopProducts({
     <div>
       {/* Toolbar */}
       <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-        <p className="text-[14px] text-secondary">
-          {sorted.length === 0
-            ? "No results"
-            : `Showing ${start + 1}–${Math.min(start + ITEMS_PER_PAGE, sorted.length)} of ${sorted.length} results`}
-        </p>
+        <div className="flex items-center gap-3">
+          <p className="text-[14px] text-secondary">
+            {sorted.length === 0
+              ? "No results"
+              : `Showing ${start + 1}–${Math.min(start + ITEMS_PER_PAGE, sorted.length)} of ${sorted.length} results`}
+          </p>
+          {(categories.length > 0 || colors.length > 0) && (
+            <button
+              type="button"
+              onClick={onReset}
+              className="rounded-full border border-line px-3 py-1 text-[12px] text-secondary transition hover:border-ink hover:text-ink"
+            >
+              Reset filters
+            </button>
+          )}
+        </div>
         <select
           value={sort}
           onChange={(e) => { setSort(e.target.value); onPageChange(1); }}
@@ -89,19 +105,22 @@ export function ShopPagination({
   priceLow,
   priceHigh,
   categories,
+  colors,
   page,
   onPageChange,
 }: {
   priceLow: number;
   priceHigh: number;
   categories: string[];
+  colors: string[];
   page: number;
   onPageChange: (p: number) => void;
 }) {
   const filtered = allProducts.filter((p) => {
     const inPrice = p.price >= priceLow && p.price <= priceHigh;
     const inCat = categories.length === 0 || categories.includes(p.category);
-    return inPrice && inCat;
+    const inColor = colors.length === 0 || colors.includes(p.color);
+    return inPrice && inCat && inColor;
   });
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const currentPage = totalPages > 0 ? Math.min(page, totalPages) : 1;

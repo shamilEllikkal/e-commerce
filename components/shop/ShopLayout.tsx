@@ -12,6 +12,7 @@ export function ShopLayout() {
   const [priceHigh, setPriceHigh] = useState(50);
   const [page, setPage] = useState(1);
   const [categories, setCategories] = useState<string[]>([]);
+  const [colors, setColors] = useState<string[]>([]);
 
   function toggleCategory(label: string) {
     setCategories((prev) =>
@@ -20,16 +21,32 @@ export function ShopLayout() {
     setPage(1);
   }
 
+  function toggleColor(label: string) {
+    setColors((prev) =>
+      prev.includes(label) ? prev.filter((c) => c !== label) : [...prev, label]
+    );
+    setPage(1);
+  }
+
+  function resetFilters() {
+    setCategories([]);
+    setColors([]);
+    setPriceLow(15);
+    setPriceHigh(50);
+    setPage(1);
+  }
+
   return (
     <section className="container mb-[100px]">
-      {/* 2/3 products + 1/3 sidebar */}
       <div className="grid grid-cols-1 gap-[50px] lg:grid-cols-[2fr_1fr]">
         <ShopProducts
           priceLow={priceLow}
           priceHigh={priceHigh}
           categories={categories}
+          colors={colors}
           page={page}
           onPageChange={setPage}
+          onReset={resetFilters}
         />
         <ShopSidebar
           priceLow={priceLow}
@@ -40,14 +57,15 @@ export function ShopLayout() {
           priceMax={PRICE_MAX}
           categories={categories}
           onToggleCategory={toggleCategory}
+          colors={colors}
+          onToggleColor={toggleColor}
         />
       </div>
-
-      {/* Pagination — full width, truly centered */}
       <ShopPagination
         priceLow={priceLow}
         priceHigh={priceHigh}
         categories={categories}
+        colors={colors}
         page={page}
         onPageChange={setPage}
       />
