@@ -36,7 +36,7 @@ export function AboutFAQ() {
 
   return (
     <section className="container mb-[100px]">
-      <h2 className="mb-[45px] text-[36px] font-bold leading-[1.1] tracking-[-2px] md:text-[42px]">
+      <h2 className="mb-[45px] text-[36px] font-semibold leading-[1.1] tracking-[-2px] md:text-[36px]">
         Frequently Asked Questions
       </h2>
 
@@ -67,7 +67,7 @@ export function AboutFAQ() {
                   {answer.split("\n\n").map((para, j) => (
                     <p
                       key={j}
-                      className="mt-0 mb-3 text-[15px] leading-[1.75] text-body last:mb-0"
+                      className="mt-0 mb-3 text-[15px] leading-[1.75] text-body font-light last:mb-0"
                     >
                       {para}
                     </p>
