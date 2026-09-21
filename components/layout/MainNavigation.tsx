@@ -1,13 +1,11 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const mainLinks = [
   { label: "Home", href: "/" },
-  { label: "Shop", href: "/shop", hasMenu: true },
-  { label: "News", href: "/news" },
+  { label: "Shop", href: "/shop" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];
@@ -47,40 +45,7 @@ export function MainNavigation() {
               `}
             >
               {link.label}
-              {link.hasMenu && <ChevronDown size={16} />}
             </Link>
-
-            {link.hasMenu && (
-              <div className="invisible absolute left-0 top-full z-50 w-48 translate-y-2 rounded-lg bg-white py-2 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                <Link
-                  href="/shop/variable-product"
-                  className="block px-5 py-3 text-sm text-secondary hover:bg-gray-50 hover:text-yellow-500! "
-                >
-                  Variable Product
-                </Link>
-
-                <Link
-                  href="/shop/product-gallery"
-                  className="block px-5 py-3 text-sm text-secondary hover:bg-gray-50 hover:text-yellow-500!"
-                >
-                  Product Gallery
-                </Link>
-
-                <Link
-                  href="/shop/custom-tab"
-                  className="block px-5 py-3 text-sm text-secondary hover:bg-gray-50 hover:text-yellow-500!"
-                >
-                  Custom Tab
-                </Link>
-
-                <Link
-                  href="/shop/advanced-reviews"
-                  className="block px-5 py-3 text-sm text-secondary hover:bg-gray-50 hover:text-yellow-500!"
-                >
-                  Advanced Reviews
-                </Link>
-              </div>
-            )}
           </div>
         );
       })}
