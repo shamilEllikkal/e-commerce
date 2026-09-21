@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
@@ -46,6 +47,12 @@ export function AboutTestimonials() {
   return (
     <section className="container mb-[100px]">
       <div className="rounded-[25px] border border-line px-[30px] py-[60px] md:px-[80px] md:py-[75px]">
+        {/* Avatar — top center */}
+        <div className="mb-8 flex justify-center">
+          <div className="relative h-[80px] w-[80px] overflow-hidden rounded-full border-[3px] border-white shadow-md">
+            <Image src="/about5.webp" alt={name} fill sizes="80px" className="object-cover" />
+          </div>
+        </div>
         {/* Arrows + quote */}
         <div className="flex items-center gap-4 md:gap-8">
           <button
@@ -58,8 +65,8 @@ export function AboutTestimonials() {
           </button>
 
           <blockquote className="flex-1 text-center">
-            <p className="text-[18px] leading-[1.65] text-ink md:text-[22px]">
-              &ldquo;{quote}&rdquo;
+            <p className="text-[18px] font-light! leading-[1.65] text-ink md:text-[27px]">
+              {quote}
             </p>
             <footer className="mt-6">
               <cite className="not-italic">

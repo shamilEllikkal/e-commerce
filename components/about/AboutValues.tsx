@@ -27,8 +27,8 @@ export function AboutValues() {
             <div className="mb-5 grid h-[52px] w-[52px] place-items-center rounded-full border border-line">
               <Icon size={24} strokeWidth={1.5} aria-hidden="true" />
             </div>
-            <h3 className="mb-3 text-[18px] font-bold">{title}</h3>
-            <p className="m-0 text-[15px] leading-[1.7] text-body">{body}</p>
+            <h3 className="mb-3 text-[25px] font-bold">{title}</h3>
+            <p className="m-0 text-[17px] font-light leading-[1.7] text-body">{body}</p>
           </div>
         ))}
       </div>

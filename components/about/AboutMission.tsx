@@ -12,7 +12,7 @@ export function AboutMission() {
   return (
     <section className="container pt-[70px] mb-[30px]">
       {/* Header row */}
-      <div className="mb-[55px] flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+      <div className="mb-[55px] flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-[580px]">
           <p className="mb-3 text-[18px] font-light text-secondary  tracking-wide">
             Our Mission to Make Kids Feel Comfortable and Confident
@@ -32,7 +32,7 @@ export function AboutMission() {
       </div>
 
       {/* Staggered 3-image gallery */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:items-end">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:items-end mt-25">
         {/* Left — shorter */}
         <div className="relative h-[320px] overflow-hidden rounded-[20px] sm:h-[360px]">
           <Image
@@ -44,7 +44,7 @@ export function AboutMission() {
           />
         </div>
         {/* Center — taller, raised */}
-        <div className="relative h-[420px] overflow-hidden rounded-[20px] sm:h-[480px] sm:-mt-[60px]">
+        <div className="relative h-[400px] overflow-hidden rounded-[20px] sm:h-[480px] sm:-mt-[60px]">
           <Image
             src="/about2.webp"
             alt="Kids room with plush toys"
