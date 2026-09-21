@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Alexandria, Manrope } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -22,14 +23,17 @@ export const metadata: Metadata = {
     "Shop playful kids fashion, toys, shoes, hats, and seasonal essentials from Kiddy.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${manrope.variable} ${alexandria.variable}`}>
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <CartProvider>
+          <Header />
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );
 }
+

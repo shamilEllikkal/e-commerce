@@ -1,24 +1,9 @@
-import {
-  ChevronDown,
-  Heart,
-  Search,
-  ShoppingBag,
-  Shuffle,
-  UserRound,
-} from "lucide-react";
-import Link from "next/link";
-
+import { Search } from "lucide-react";
 import { Brand } from "@/components/ui/Brand";
 import { PhonePill } from "@/components/ui/PhonePill";
 import { MobileMenu } from "./MobileMenu";
 import { MainNavigation } from "./MainNavigation";
-
-const utilityLinks = [
-  { label: "Login", href: "/login", icon: UserRound },
-  { label: "Compare", href: "/compare", icon: Shuffle },
-  { label: "Wishlist", href: "/wishlist", icon: Heart },
-  { label: "$0.00", href: "/cart", icon: ShoppingBag },
-];
+import { AccountNav } from "./AccountNav";
 
 export function Header() {
   return (
@@ -73,28 +58,7 @@ export function Header() {
       <div className="container hidden min-h-[72px] items-end justify-between border-b border-line text-[#576471] lg:flex">
         {/* Main Navigation */}
         <MainNavigation />
-
-        {/* Account Navigation */}
-        <nav
-          className="flex h-[72px] items-center gap-6"
-          aria-label="Account navigation"
-        >
-          {utilityLinks.map(({ label, href, icon: Icon }) => (
-            <Link
-              key={label}
-              href={href}
-              className="inline-flex h-[72px] items-center gap-2 text-[12px] font-medium uppercase transition-colors duration-200 hover:text-yellow-500! text-secondary"
-            >
-              <Icon
-                size={19}
-                strokeWidth={1.8}
-                aria-hidden="true"
-              />
-
-              {label}
-            </Link>
-          ))}
-        </nav>
+        <AccountNav />
       </div>
     </header>
   );

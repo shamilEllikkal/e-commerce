@@ -1,10 +1,16 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { Loader2 } from "lucide-react";
 import type { Product } from "@/types/product";
 import { ProductActions } from "./ProductActions";
 import { ProductPrice } from "./ProductPrice";
+import { useCart } from "@/context/CartContext";
 
 export function ProductCard({ product }: { product: Product }) {
+  const { addToCart, loadingProductId } = useCart();
+  const isLoading = loadingProductId === product.id;
+
   return (
     <article className="overflow-hidden rounded-2xl border group border-[#e6e9ec] bg-white">
       <div className="relative grid h-[240px] place-items-center p-[35px] md:h-[280px]">
@@ -24,9 +30,21 @@ export function ProductCard({ product }: { product: Product }) {
 
       <div className="grid min-h-[65px] grid-cols-2 items-center border-t border-[#eceff1]">
         <ProductPrice price={product.price} oldPrice={product.oldPrice} />
-        <Link href={`/product/${product.id}`} className="grid h-full place-items-center font-medium text-[15px] hover:text-yellow-500! text-secondary!">
-          Add to cart
-        </Link>
+        <button
+          type="button"
+          onClick={() => addToCart(product)}
+          disabled={isLoading}
+          className="grid h-full place-items-center font-medium text-[15px] text-secondary transition-colors hover:text-yellow-500 disabled:opacity-60"
+        >
+          {isLoading ? (
+            <span className="inline-flex items-center gap-1.5 text-[14px]">
+              <Loader2 size={16} className="animate-spin text-yellow-500" />
+              Adding...
+            </span>
+          ) : (
+            "Add to cart"
+          )}
+        </button>
       </div>
     </article>
   );
