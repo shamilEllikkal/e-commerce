@@ -27,8 +27,8 @@ export function Benefits() {
   return (
     <section className="container mb-[85px] grid min-h-[180px] grid-cols-1 gap-[35px] rounded-[25px] bg-ink p-[30px] text-white md:grid-cols-2 md:p-[42px] xl:grid-cols-4">
       {benefits.map(({ title, body, icon: Icon }) => (
-        <div key={title} className="grid grid-cols-[50px_1fr] gap-[15px]">
-          <Icon size={35} strokeWidth={1.5} aria-hidden="true" />
+        <div key={title} className="flex flex-col items-center text-center sm:grid sm:grid-cols-[50px_1fr] sm:text-left gap-[15px]">
+          <Icon size={35} strokeWidth={1.5} aria-hidden="true" className="shrink-0" />
           <div>
             <h3 className="mb-2 text-[17px] font-semibold">{title}</h3>
             <p className="m-0 text-[14px] leading-[1.65] text-[#d1d8df]">{body}</p>

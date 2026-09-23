@@ -3,24 +3,61 @@
 import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { LoginModal } from "@/components/ui/LoginModal";
+import { CartDrawer } from "@/components/ui/CartDrawer";
 
-const links = ["Home", "Shop", "News", "About Us", "Contact Us"];
+const links = [
+  { label: "Home", href: "/" },
+  { label: "Shop", href: "/shop" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact Us", href: "/contact" },
+];
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const { cartOpen, setCartOpen, totalCount } = useCart();
 
   return (
-    <div className="lg:hidden ">
+    <div className="flex items-center gap-2 lg:hidden">
+      {/* Login Icon */}
+      <button
+        type="button"
+        aria-label="Open login"
+        onClick={() => setLoginOpen(true)}
+        className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white text-secondary transition hover:text-ink"
+      >
+        <UserRound size={18} />
+      </button>
+
+      {/* Cart Icon with Yellow Badge */}
+      <button
+        type="button"
+        aria-label="Open cart"
+        onClick={() => setCartOpen(true)}
+        className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-white text-secondary transition hover:text-ink"
+      >
+        <ShoppingBag size={18} />
+        {totalCount > 0 ? (
+          <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-yellow-500 text-[10px] font-extrabold text-white shadow-xs">
+            {totalCount}
+          </span>
+        ) : null}
+      </button>
+
+      {/* Hamburger Menu Toggle */}
       <button
         type="button"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         onClick={() => setOpen((current) => !current)}
-        className="grid h-11 w-11 place-items-center rounded-full border border-line bg-white"
+        className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white text-secondary transition hover:text-ink"
       >
         {open ? <X size={20} /> : <Menu size={20} />}
       </button>
 
+      {/* Dropdown Menu */}
       {open ? (
         <div className="absolute inset-x-3 top-[86px] z-20 rounded-2xl border border-line bg-white p-4 shadow-xl">
           <div className="mb-4 grid h-12 grid-cols-[1fr_44px] overflow-hidden rounded-[10px] bg-soft">
@@ -34,27 +71,23 @@ export function MobileMenu() {
             </button>
           </div>
           <nav className="grid gap-1" aria-label="Mobile navigation">
-            {links.map((link) => (
+            {links.map(({ label, href }) => (
               <Link
-                key={link}
-                href={link === "Home" ? "/" : `/${link.toLowerCase().replaceAll(" ", "-")}`}
-                className="rounded-xl px-3 py-3 text-[13px] font-bold uppercase text-[#34485d]"
+                key={label}
+                href={href}
+                className="rounded-xl px-3 py-3 text-[13px] font-bold uppercase text-[#34485d] transition hover:bg-soft"
                 onClick={() => setOpen(false)}
               >
-                {link}
+                {label}
               </Link>
             ))}
           </nav>
-          <div className="mt-3 grid grid-cols-2 gap-2 border-t border-line pt-3">
-            <Link href="/login" className="inline-flex items-center gap-2 rounded-xl bg-soft px-3 py-3 text-[12px] font-bold uppercase">
-              <UserRound size={16} /> Login
-            </Link>
-            <Link href="/cart" className="inline-flex items-center gap-2 rounded-xl bg-soft px-3 py-3 text-[12px] font-bold uppercase">
-              <ShoppingBag size={16} /> $0.00
-            </Link>
-          </div>
         </div>
       ) : null}
+
+      {/* Modals & Drawers */}
+      {loginOpen && <LoginModal onClose={() => setLoginOpen(false)} />}
+      {cartOpen && <CartDrawer onClose={() => setCartOpen(false)} />}
     </div>
   );
 }

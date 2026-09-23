@@ -35,8 +35,8 @@ export function AboutFAQ() {
   const [open, setOpen] = useState<number>(0);
 
   return (
-    <section className="container mb-[100px]">
-      <h2 className="mb-[45px] text-[36px] font-semibold leading-[1.1] tracking-[-2px] md:text-[36px]">
+    <section className="container mb-25">
+      <h2 className="mb-11.25 text-[36px] font-semibold leading-[1.1] tracking-[-2px] md:text-[36px]">
         Frequently Asked Questions
       </h2>
 

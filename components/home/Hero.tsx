@@ -57,15 +57,16 @@ function buildBurstPath({
 interface DiscountBadgeProps {
   percent?: number;
   label?: string;
+  className?: string;
 }
 
-function DiscountBadge({ percent = 30, label = "OFF" }: DiscountBadgeProps) {
+function DiscountBadge({ percent = 30, label = "OFF", className = "" }: DiscountBadgeProps) {
   const outerPath = buildBurstPath({ outerR: 102, innerR: 82, radius: 8 });
   const innerPath = buildBurstPath({ outerR: 87, innerR: 68, radius: 7 });
 
   return (
     <div
-      className="absolute left-1/2 top-[45px] z-10 h-[135px] w-[135px] -translate-x-1/2 md:top-[20px] md:h-48 md:w-48"
+      className={`absolute z-10 h-[120px] w-[120px] sm:h-[135px] sm:w-[135px] lg:h-48 lg:w-48 ${className}`}
       aria-label={`${percent}% off`}
     >
       <svg viewBox="0 0 200 200" className="h-full w-full">
@@ -81,8 +82,8 @@ function DiscountBadge({ percent = 30, label = "OFF" }: DiscountBadgeProps) {
       </svg>
 
       <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center font-extrabold text-[var(--ink)]">
-        <div className="text-[31px] leading-none md:text-[44px]">{percent}%</div>
-        <div className="text-[16px] leading-tight md:text-[22px]">{label}</div>
+        <div className="text-[26px] sm:text-[31px] lg:text-[44px] leading-none">{percent}%</div>
+        <div className="text-[13px] sm:text-[16px] lg:text-[22px] leading-tight">{label}</div>
       </div>
     </div>
   );
@@ -90,9 +91,9 @@ function DiscountBadge({ percent = 30, label = "OFF" }: DiscountBadgeProps) {
 
 export function Hero() {
   return (
-    <section className="container grid min-h-[700px] grid-cols-1 items-center gap-[35px] py-[55px] lg:grid-cols-[0.95fr_1.05fr] lg:gap-[50px] lg:py-[85px_80px]">
-      <div>
-        <h1 className="m-0 mb-[34px] text-[20px] font-bold leading-[1.06] tracking-[-3px] md:text-[76px] lg:text-[90px] lg:tracking-[-5px]">
+    <section className="container grid min-h-[700px] grid-cols-1 items-center gap-[35px] py-[35px] sm:py-[55px] lg:grid-cols-[0.95fr_1.05fr] lg:gap-[50px] lg:py-[85px_80px]">
+      <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+        <h1 className="m-0 mb-[24px] sm:mb-[34px] text-[34px] sm:text-[54px] md:text-[76px] lg:text-[90px] font-semibold leading-[1.06] tracking-[-2px] md:tracking-[-3px] lg:tracking-[-5px]">
           Where
           <br />
           Every Little
@@ -101,24 +102,28 @@ export function Hero() {
           <br />
           Style
         </h1>
-        <p className="mb-[42px] max-w-[620px] text-[16px] leading-[1.7] text-secondary lg:text-[18px]">
+        <p className="mb-[32px] sm:mb-[42px] max-w-[620px] text-[16px] sm:text-[18px] leading-[1.7] text-secondary">
           Explore our exclusive collection of kids&apos; clothes and toys to get
           ready for the autumn season.
         </p>
-        <div className="flex flex-wrap gap-7">
-          <ButtonLink href="/shop" variant="dark" className="text-white! font-medium hover:bg-yellow-500 hover:border-0  hover:text-primary! px-6">
+        <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-7">
+          <ButtonLink href="/shop" variant="dark" className="text-white! font-medium hover:bg-yellow-500 hover:border-0 hover:text-primary! px-6">
             Explore Collection <ArrowUpRight size={18} />
           </ButtonLink>
-          <ButtonLink href="/promo-video" className="font-medium hover:bg-yellow-500 hover:border-0 ">
+          <ButtonLink href="/promo-video" className="font-medium hover:bg-yellow-500 hover:border-0">
             <Play size={18} /> Promo Video
           </ButtonLink>
         </div>
       </div>
 
-      <div className="relative w-full h-full flex justify-between gap-8 pb-20">
-        <DiscountBadge percent={30} label="OFF" />
+      <div className="relative w-full h-full flex flex-col lg:flex-row justify-between gap-8 pb-10 sm:pb-20">
+        <DiscountBadge
+          percent={30}
+          label="OFF"
+          className="-top-4 -right-4 lg:left-1/2 lg:top-[20px] lg:right-auto lg:-translate-x-1/2"
+        />
 
-        <div className="bg-yellow rounded-2xl w-full mt-15">
+        <div className="bg-yellow rounded-2xl w-full mt-6 lg:mt-15">
           <div className="flex items-end justify-center h-full">
             <Image
               className="mx-auto w-auto h-auto"
