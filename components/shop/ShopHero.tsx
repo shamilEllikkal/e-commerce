@@ -21,28 +21,30 @@ const cards = [
 
 export function ShopHero() {
   return (
-    <section className="container py-[60px] ">
-      <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_0.8fr_1.3fr] h-120 gap-7">
-        {/* Card 1 — large with image bg */}
-       <HeroCard
-  bg="bg-[#dcefe9]"
-  image="/shop1.webp"
-  alt="New toys collection"
-  label="Blandit Natoque Elementum Nascetur"
-  href="/shop/toys"
-  cta={cards[0].cta}
-/>
+    <section className="container py-[30px] sm:py-[60px]">
+      <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_0.8fr_1.3fr] lg:h-120 gap-7">
+        {/* Card 1 */}
+        <HeroCard
+          bg="bg-[#dcefe9]"
+          image="/shop1.webp"
+          alt="New toys collection"
+          label="Blandit Natoque Elementum Nascetur"
+          href="/shop/toys"
+          cta={cards[0].cta}
+        />
 
-<HeroCard
-  bg="bg-lavender"
-  image="/shop2.webp"
-  alt="New shoes collection"
-  label="Fermentum Maximus Consecte Bingilla"
-  href="/shop/shoes"
-  cta={cards[1].cta}
-/>
-        {/* Card 3 — same layout as cards 1 & 2 */}
-        <article className="relative min-h-[340px] overflow-hidden rounded-[25px] group bg-pink">
+        {/* Card 2 */}
+        <HeroCard
+          bg="bg-lavender"
+          image="/shop2.webp"
+          alt="New shoes collection"
+          label="Fermentum Maximus Consecte Bingilla"
+          href="/shop/shoes"
+          cta={cards[1].cta}
+        />
+
+        {/* Card 3 */}
+        <article className="relative min-h-[300px] sm:min-h-[340px] overflow-hidden rounded-[25px] group bg-pink">
           <Image
             src="/shop3.webp"
             alt="Discounts collection"
@@ -50,16 +52,15 @@ export function ShopHero() {
             sizes="(max-width: 1024px) 100vw, 40vw"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent to-60%" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent to-60%" />
 
           {/* Top-left pill */}
-          <span className="absolute top-6 left-6 z-10 flex h-11 items-center rounded-xl bg-white px-5 text-[13px] font-medium tracking-wide text-ink">
+          <span className="absolute top-6 left-6 z-10 flex h-11 items-center rounded-xl bg-white px-5 text-[13px] font-medium tracking-wide text-ink shadow-xs">
             Discounts
           </span>
 
           {/* Bottom: label + subscribe form */}
           <div className="absolute bottom-8 left-8 right-8 z-10 text-white">
-           
             <SubscribeForm variant="mini" placeholder="Your email address" />
           </div>
 
@@ -90,14 +91,14 @@ function HeroCard({
   alt: string;
   label: string;
   href: string;
-   cta: {
+  cta: {
     text: string;
     href: string;
   };
 }) {
   return (
     <article
-      className={`relative min-h-[340px] overflow-hidden rounded-[25px] group ${bg}`}
+      className={`relative min-h-[300px] sm:min-h-[340px] overflow-hidden rounded-[25px] group ${bg}`}
     >
       <Image
         src={image}
@@ -106,20 +107,16 @@ function HeroCard({
         sizes="(max-width: 1024px) 100vw, 40vw"
         className="object-cover transition-transform duration-300 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent to-60%" />
-<span
- 
-  className="absolute top-6 left-6 z-10 flex h-11 items-center rounded-xl bg-white px-5 text-[13px] font-medium  tracking-wide text-ink"
->
-  {cta.text}
-</span>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent to-60%" />
+      <span className="absolute top-6 left-6 z-10 flex h-11 items-center rounded-xl bg-white px-5 text-[13px] font-medium tracking-wide text-ink shadow-xs">
+        {cta.text}
+      </span>
 
       {/* Bottom-left label */}
       <div className="absolute bottom-8 left-8 text-white z-10">
-        <span className="text-[18px] font-semibold  tracking-wide block mb-3">
+        <span className="text-[18px] font-semibold tracking-wide block mb-3">
           {label}
         </span>
-      
       </div>
 
       {/* Top-right arrow */}
